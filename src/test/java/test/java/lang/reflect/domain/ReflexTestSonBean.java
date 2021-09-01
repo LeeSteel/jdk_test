@@ -36,10 +36,4 @@ public class ReflexTestSonBean extends  ReflexTestFatherBean{
         this.sonName = sonName;
     }
 
-    @Override
-    public String toString() {
-        return "ReflexTestSonBean{" +
-                "sonName='" + sonName + '\'' +
-                '}';
-    }
 }

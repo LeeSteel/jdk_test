@@ -1,5 +1,7 @@
 package test.java.lang.reflect;
 
+import test.java.lang.reflect.domain.ReflexTestSonBean;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -45,8 +47,9 @@ public class ReflexTest {
         //为true 关闭访问检查
         fatherName.setAccessible(true);
         fatherName.set(sonBean,"testFather");
+        System.out.println(((ReflexTestSonBean)sonBean).getSonName());
+        System.out.println(((ReflexTestSonBean)sonBean).getFatherName());
 
-        System.out.println(sonBean);
 
     }
 
