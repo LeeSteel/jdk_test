@@ -22,21 +22,21 @@ public class HashTableTest {
 
     public static void main(String[] args) {
 
-        Map<A, Object> map = new Hashtable<A, Object>();
+        Map<HashKeyTestBean, Object> map = new Hashtable<HashKeyTestBean, Object>();
         int oldCapacity = Integer.MAX_VALUE -8;
         int newCapacity = (oldCapacity << 1) + 1;
 
-        map.put(new A(), new Object());
-        map.put(new A(), new Object());
-        map.put(new A(), new Object());
-        map.put(new A(), new Object());
-        map.put(new A(), new Object());
-        map.put(new A(), new Object());
-        map.put(new A(), new Object());
-        map.put(new A(), new Object());
-        map.put(new A(), new Object());
-        map.put(new A(), new Object());
-        map.put(new A(), new Object());
+        map.put(new HashKeyTestBean(), new Object());
+        map.put(new HashKeyTestBean(), new Object());
+        map.put(new HashKeyTestBean(), new Object());
+        map.put(new HashKeyTestBean(), new Object());
+        map.put(new HashKeyTestBean(), new Object());
+        map.put(new HashKeyTestBean(), new Object());
+        map.put(new HashKeyTestBean(), new Object());
+        map.put(new HashKeyTestBean(), new Object());
+        map.put(new HashKeyTestBean(), new Object());
+        map.put(new HashKeyTestBean(), new Object());
+        map.put(new HashKeyTestBean(), new Object());
 
         System.out.println(map.size());
     }

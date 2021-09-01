@@ -1,4 +1,6 @@
-package test.java.util;
+package test.java.util.hashmap;
+
+import test.java.util.TreeNode;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;

@@ -1,4 +1,6 @@
-package test.java.util;
+package test.java.util.hashmap;
+
+import test.java.util.HashKeyTestBean;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,20 +24,20 @@ public class HashMapTest {
 
     public static void main(String[] args) {
 
-        Map<A, Object> map = new HashMap<A, Object>();
+        Map<HashKeyTestBean, Object> map = new HashMap<HashKeyTestBean, Object>();
 
 
-        map.put(new A(), new Object());
-        map.put(new A(), new Object());
-        map.put(new A(), new Object());
-        map.put(new A(), new Object());
-        map.put(new A(), new Object());
-        map.put(new A(), new Object());
-        map.put(new A(), new Object());
-        map.put(new A(), new Object());
-        map.put(new A(), new Object());
-        map.put(new A(), new Object());
-        map.put(new A(), new Object());
+        map.put(new HashKeyTestBean(), new Object());
+        map.put(new HashKeyTestBean(), new Object());
+        map.put(new HashKeyTestBean(), new Object());
+        map.put(new HashKeyTestBean(), new Object());
+        map.put(new HashKeyTestBean(), new Object());
+        map.put(new HashKeyTestBean(), new Object());
+        map.put(new HashKeyTestBean(), new Object());
+        map.put(new HashKeyTestBean(), new Object());
+        map.put(new HashKeyTestBean(), new Object());
+        map.put(new HashKeyTestBean(), new Object());
+        map.put(new HashKeyTestBean(), new Object());
 
         System.out.println(map.size());
     }
@@ -58,17 +60,3 @@ public class HashMapTest {
 }
 
 
-class A {
-
-    @Override
-    public boolean equals(Object obj) {
-
-        return false;
-    }
-
-    @Override
-    public int hashCode() {
-
-        return 1;
-    }
-}

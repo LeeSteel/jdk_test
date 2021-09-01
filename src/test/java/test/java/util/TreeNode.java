@@ -22,15 +22,15 @@ public class TreeNode<K, V> {
     static final int UNTREEIFY_THRESHOLD = 6;
     final int hash;
     final K key;
-    V value;
-    TreeNode<K, V> next;
-    TreeNode<K, V> parent;  // red-black tree links
-    TreeNode<K, V> left;
-    TreeNode<K, V> right;
-    TreeNode<K, V> prev;    // needed to unlink next upon deletion
-    boolean red;
+    public  V value;
+    public   TreeNode<K, V> next;
+    public  TreeNode<K, V> parent;  // red-black tree links
+     public   TreeNode<K, V> left;
+    public  TreeNode<K, V> right;
+    public  TreeNode<K, V> prev;    // needed to unlink next upon deletion
+    public  boolean red;
 
-    TreeNode(int hash, K key, V val, TreeNode<K, V> next) {
+    public TreeNode(int hash, K key, V val, TreeNode<K, V> next) {
         this.hash = hash;
         this.key = key;
         this.value = val;
