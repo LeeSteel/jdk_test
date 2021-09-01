@@ -4,7 +4,9 @@ package test.java.util.concurrent;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.LinkedBlockingDeque;
@@ -72,6 +74,33 @@ public class CommonUtil {
 
 
     public static void main(String[] args) {
+        int size = 1000;
+
+        long startTimeMills = System.currentTimeMillis();
+        ExecutorService executorService =
+                new ThreadPoolExecutor(processorsCount, processorsCount * 8, 60L,
+                        TimeUnit.SECONDS, new LinkedBlockingDeque<>(1024),
+                        new ThreadFactoryBuilder().setNameFormat("test-%d").build(),
+                        new ThreadPoolExecutor.AbortPolicy());
+        for (int i = 0; i < 1000; i++) {
+            List<Double> doubleList = initData(size);
+            executorService.execute(() -> {
+                List<CompletableFuture<Double>> completableFutures = CommonUtil.calcIntervalRateOfReturn(doubleList, 2);
+                List<Double> collect = completableFutures.stream().map(CompletableFuture::join).collect(Collectors.toList());
+                System.out.println("Thread-Name:"+Thread.currentThread().getName());
+            });
+
+        }
+      //  executorService.shutdown();
+        long endTimeMills = System.currentTimeMillis();
+        System.out.println(endTimeMills - startTimeMills);
+      //  executorService.shutdown();
+        while (true){
+
+        }
+    }
+
+    public static void calcIntervalRateOfReturnTest() {
         List<Double> collect1 = Stream.of(-0.001471, 0.005247, 0.005697, 0.010783, 0.00939, 0.012461, 0.012447,
                 0.012934, 0.013866, 0.014322, 0.015805, 0.015596, 0.014346, 0.009928).collect(Collectors.toList());
         List<Double> collect2 = Stream.of(-0.001471, 0.005247, 0.005697, 0.010783, 0.00939, 0.012461, 0.012447,
@@ -91,7 +120,17 @@ public class CommonUtil {
         System.out.println("main线程---2 --计算完毕");
 
         executorService.shutdown();
+    }
 
 
+    public static List<Double> initData(int size) {
+        List<Double> doubleList = new ArrayList<>();
+
+        for (int i = 0; i < size; i++) {
+            Random random = new Random();
+            double nextDouble = random.nextDouble();
+            doubleList.add(nextDouble);
+        }
+        return doubleList;
     }
 }
