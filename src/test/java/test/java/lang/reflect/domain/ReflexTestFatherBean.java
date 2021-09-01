@@ -16,6 +16,7 @@ public class ReflexTestFatherBean {
     public void method() {
         System.out.println("father    method  is run");
     }
+
     private void fatherPriMethod() {
         System.out.println("father  private  method  is run");
     }
@@ -34,5 +35,12 @@ public class ReflexTestFatherBean {
 
     public void setFatherName(String fatherName) {
         this.fatherName = fatherName;
+    }
+
+    @Override
+    public String toString() {
+        return "ReflexTestFatherBean{" +
+                "fatherName='" + fatherName + '\'' +
+                '}';
     }
 }

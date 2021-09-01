@@ -11,6 +11,8 @@ package test.java.lang.reflect.domain;
  */
 public class ReflexTestSonBean extends  ReflexTestFatherBean{
     private String sonName;
+
+    @Override
     public void method() {
         System.out.println("son  method  is run");
     }
@@ -32,5 +34,12 @@ public class ReflexTestSonBean extends  ReflexTestFatherBean{
 
     public void setSonName(String sonName) {
         this.sonName = sonName;
+    }
+
+    @Override
+    public String toString() {
+        return "ReflexTestSonBean{" +
+                "sonName='" + sonName + '\'' +
+                '}';
     }
 }

@@ -1,8 +1,8 @@
 package test.java.lang.reflect;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +20,34 @@ public class ReflexTest {
     public static void main(String[] args) throws Exception {
         doTest();
         doGetMethodsTest();
+        doGetFieldsTest();
+    }
+
+    /**
+     * 测试反射是否能够获取到父类属性
+     *
+     * @throws Exception
+     */
+    public static void doGetFieldsTest() throws Exception {
+
+        Class<?> testClass = Class.forName("test.java.lang.reflect.domain.ReflexTestSonBean");
+        //getDeclaredFields() 可以拿到反射类中的公共字段、私有字段、保护字段、默认访问，但不获得继承的字段。
+        //getFields() 可以拿到反射类及其父类中的所有公共字段。
+        Field[] fields = testClass.getDeclaredFields();
+        Object sonBean = testClass.getDeclaredConstructor().newInstance();
+        Field sonName = testClass.getDeclaredField("sonName");
+        //为true 关闭访问检查
+        sonName.setAccessible(true);
+        sonName.set(sonBean,"testSon");
+
+        Class<?> superclass = testClass.getSuperclass();
+        Field fatherName = superclass.getDeclaredField("fatherName");
+        //为true 关闭访问检查
+        fatherName.setAccessible(true);
+        fatherName.set(sonBean,"testFather");
+
+        System.out.println(sonBean);
+
     }
 
     /**
@@ -30,11 +58,15 @@ public class ReflexTest {
     public static void doGetMethodsTest() throws Exception {
 
         Class<?> testClass = Class.forName("test.java.lang.reflect.domain.ReflexTestSonBean");
-        Object instance = testClass.getDeclaredConstructor().newInstance();
+        //getDeclaredMethods() 可以拿到反射类中的公共方法、私有方法、保护方法、默认访问，但不获得继承的方法。
+        //getMethods() 可以拿到反射类及其父类中的所有公共方法。
         Method[] methods = testClass.getMethods();
         Map<String, List<Method>> classMap = new HashMap<>();
         for (Method method : methods) {
             String className = method.getDeclaringClass().getName();
+            //1、父类私有方法无法直接获得，需要 getSuperclass，然后才能获得
+            //2、重写了父类方法后，无法获取原父方法
+
             List<Method> methodList = classMap.get(className);
             if (methodList == null) {
                 methodList = new ArrayList<>();
@@ -51,7 +83,7 @@ public class ReflexTest {
     }
 
     /**
-     * 测试反射是否能够获取到父类方法
+     * 测试反射是否能够获取到私有方法
      *
      * @throws Exception
      */
@@ -59,9 +91,6 @@ public class ReflexTest {
 
         Class<?> testClass = Class.forName("test.java.lang.reflect.domain.ReflexTestSonBean");
         Object instance = testClass.getDeclaredConstructor().newInstance();
-        Method[] methods = testClass.getMethods();
-        Arrays.stream(methods).forEach(System.out::println);
-
         Method method = testClass.getDeclaredMethod("method");
         method.invoke(instance);
 
