@@ -44,7 +44,7 @@ public class HashMapLoopTest {
     public static void doTestLoop2(Map<String, Object> map) {
         System.out.println("循环方式2");
         Iterator<Map.Entry<String, Object>> iterator = map.entrySet().iterator();
-        while (iterator.hasNext()){
+        while (iterator.hasNext()) {
             Map.Entry<String, Object> entry = iterator.next();
             System.out.print("key:" + entry.getKey() + "\t");
             System.out.print("value:" + entry.getValue());
@@ -64,7 +64,7 @@ public class HashMapLoopTest {
 
     public static void doTestLoop4(Map<String, Object> map) {
         System.out.println("循环方式4");
-        map.forEach((key,value)->{
+        map.forEach((key, value) -> {
             System.out.print("key:" + key + "\t");
             System.out.print("value:" + value);
             System.out.println("");
