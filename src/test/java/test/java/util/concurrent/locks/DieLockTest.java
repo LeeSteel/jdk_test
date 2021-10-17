@@ -10,25 +10,32 @@ package test.java.util.concurrent.locks;
  * @Copyright: Copyright (c) 2019
  */
 public class DieLockTest {
+    protected String name;
+
+    public DieLockTest(String name) {
+        this.name = name;
+    }
+
     public static void main(String[] args) {
-        DieLockTest targetOne = new DieLockTest();
-        DieLockTest targetTwo = new DieLockTest();
+        DieLockTest targetOne = new DieLockTest("targetOne");
+        DieLockTest targetTwo = new DieLockTest( "targetTwo");
         new Thread(() -> toLock(targetOne, targetTwo), "ThreadA").start();
         new Thread(() -> toLock(targetTwo, targetOne), "ThreadB").start();
 
 
     }
 
-    public static void toLock(Object targetOne, Object targetTwo) {
+    public static void toLock(DieLockTest targetOne, DieLockTest targetTwo) {
         synchronized (targetOne) {
-            System.out.println(Thread.currentThread().getName() + "锁住 targetOne");
+            System.out.println(Thread.currentThread().getName() + "锁住" + targetOne.name);
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            System.out.println(Thread.currentThread().getName() + "等待获取" + targetTwo.name);
             synchronized (targetTwo) {
-                System.out.println(Thread.currentThread().getName() + "锁住 targetTwo");
+                System.out.println(Thread.currentThread().getName() + "锁住" + targetTwo.name);
             }
         }
     }
