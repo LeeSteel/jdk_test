@@ -10,7 +10,7 @@ import java.util.concurrent.CyclicBarrier;
  * @version V1.0
  * @Title:
  * @Package
- * @Description:
+ * @Description: 测试线程栅栏 CyclicBarrier类
  * @author: 李钢 2580704698@qq.com
  * @date: 2021/10/15 15:20
  * @Copyright: Copyright (c) 2019
