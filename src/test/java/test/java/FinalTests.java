@@ -1,5 +1,9 @@
 package test.java;
 
+import lombok.Data;
+import lombok.ToString;
+import org.junit.jupiter.api.Test;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -13,15 +17,18 @@ import java.util.List;
  * @date: 2021/3/6 20:08
  * @Copyright: Copyright (c) 2019
  */
-public class FinalTest {
-    private static final List<Dog> dogList = new ArrayList() {{
-        add(new Dog(10, "小黑"));
-        add(new Dog(8, "小白"));
-    }};
+public class FinalTests {
+    private static final List<Dog> dogList;
 
+    static {
+        dogList = new ArrayList() {{
+            add(new Dog(10, "小黑"));
+            add(new Dog(8, "小白"));
+        }};
+    }
 
-    public static void main(String[] args) {
-
+    @Test
+    public void unmodifiableListTest() {
 
         List<Dog> tempDogList = Collections.unmodifiableList(dogList);
         // tempDogList.add(new test.java.Dog(1, "小红花"));
@@ -39,39 +46,21 @@ public class FinalTest {
         System.out.println("dogList:" + dogList.toString());
 
     }
+
+
+    @Data
+    @ToString
+    public static class Dog {
+        public Dog(Integer age, String name) {
+            this.age = age;
+            this.name = name;
+        }
+
+        private Integer age;
+        private String name;
+    }
+
 }
 
-class Dog {
-    private Integer age;
-    private String name;
 
-    public Dog(Integer age, String name) {
-        this.age = age;
-        this.name = name;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public String toString() {
-        return "test.java.Dog{" +
-                "age=" + age +
-                ", name='" + name + '\'' +
-                '}';
-    }
-}
 
