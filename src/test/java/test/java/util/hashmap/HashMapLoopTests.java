@@ -14,7 +14,7 @@ import java.util.Set;
  * @date: 2021/9/1 16:12
  * @Copyright: Copyright (c) 2019
  */
-public class HashMapLoopTest {
+public class HashMapLoopTests {
 
     public static void main(String[] args) {
         Map<String, Object> testMap = initData();
