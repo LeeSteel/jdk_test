@@ -5,13 +5,20 @@ package test.java.lang;
  * @Title:
  * @Package
  * @Description: 测试Integer 的一些方法
+ *
  * @author: 李钢 2580704698@qq.com
  * @date: 2021/6/4 16:54
  * @Copyright: Copyright (c) 2019
  */
 public class IntegerTest {
     public static void main(String[] args) {
-
+        /**
+         * 缓存以支持 JLS 要求的 -128 和 127（含）之间的值的自动装箱的对象标识语义。
+         * 缓存在第一次使用时被初始化。
+         * 缓存的大小可以由 {@code -XX:AutoBoxCacheMax=<size>} 选项控制。
+         * 在VM初始化时，可以设置java.lang.Integer.IntegerCache.high
+         * 属性并保存在sun.misc.VM类的私有系统属性中。
+         */
         doTestEquals1_1();
         doTestEquals1_2();
 
