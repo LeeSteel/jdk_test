@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
  * @date: 2021/3/15 19:01
  * @Copyright: Copyright (c) 2019
  */
-public class ArrayTest {
+public class ArrayTests {
 
     @Test
     public void errorInitLengthTest() {

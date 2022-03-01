@@ -1,5 +1,7 @@
 package test.java.util;
 
+import org.junit.jupiter.api.Test;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -13,16 +15,12 @@ import java.util.List;
  * @date: 2022/2/23 16:06
  * @Copyright: Copyright (c) 2019
  */
-public class CollectionsTest {
-    public static void main(String[] args) {
-
-        shuffleTest();
-    }
-
+public class CollectionsTests {
     /**
      * 集合工具类 混淆 shuffle 测试
      */
-    public static void shuffleTest() {
+    @Test
+    public void shuffleTest() {
         List<String> list = new ArrayList<>();
         int size = 10;
         for (int i = 0; i < size; i++) {

@@ -14,10 +14,10 @@ import java.util.List;
  * @date: 2021/4/30 17:44
  * @Copyright: Copyright (c) 2019
  */
-public class ArrayListTest {
+public class ArrayListTests {
 
     @Test
-    public void doTestRemoveIndex() {
+    public void removeIndexTest() {
         List<String> list = new ArrayList<>();
         list.add("1");
         list.add("2");
@@ -33,7 +33,7 @@ public class ArrayListTest {
      * 测试 指定初始化容量，添加到指定下标中
      */
     @Test
-    public void doTestIndexAdd() {
+    public void initAndIndexAdd() {
         ArrayList list = new ArrayList(4);
         Object obj1 = new Object();
         list.add(1, obj1);

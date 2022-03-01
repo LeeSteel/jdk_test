@@ -13,7 +13,7 @@ import java.util.Arrays;
  * @date: 2021/10/15 16:15
  * @Copyright: Copyright (c) 2019
  */
-public class TwoDimensionalArrayTest {
+public class TwoDimensionalArrayTests {
 
     @Test
     public void flatMapToIntTest() {
