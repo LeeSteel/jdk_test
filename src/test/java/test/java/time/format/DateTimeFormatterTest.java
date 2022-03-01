@@ -1,5 +1,7 @@
 package test.java.time.format;
 
+import org.junit.jupiter.api.Test;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAccessor;
@@ -21,17 +23,25 @@ public class DateTimeFormatterTest {
 
     static ThreadPoolExecutor poolExecutor
             = new ThreadPoolExecutor(10, 100,
-            1, TimeUnit.MINUTES, new LinkedBlockingQueue<>(1000));
+            1, TimeUnit.MINUTES, new LinkedBlockingQueue<>(20000));
 
-    public static void main(String[] args) {
-
-        while (true) {
+    /**
+     * 测试 DateTimeFormatter 是否线程安全
+     */
+    @Test
+    public void threadSafeTest() {
+        int size = 10000;
+        for (int i = 0; i < size; i++) {
             poolExecutor.execute(() -> {
-                String dateString = dateTimeFormatter.format(LocalDateTime.now());
-                    TemporalAccessor parseDate = dateTimeFormatter.parse(dateString);
-                    String dateString2 = dateTimeFormatter.format(parseDate);
-                    System.out.println(dateString.equals(dateString2));
+                String formatLocalDateTimeStr = dateTimeFormatter.format(LocalDateTime.now());
+                TemporalAccessor parseDate = dateTimeFormatter.parse(formatLocalDateTimeStr);
+                String formatTemporalAccessorStr = dateTimeFormatter.format(parseDate);
+                System.out.println("formatLocalDateTimeStr   :" + formatLocalDateTimeStr);
+                System.out.println("formatTemporalAccessorStr:" + formatTemporalAccessorStr);
+
+                System.out.println(formatLocalDateTimeStr.equals(formatTemporalAccessorStr));
             });
         }
     }
 }
+
