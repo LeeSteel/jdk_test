@@ -25,15 +25,22 @@ public class FinalTests {
             add(new Dog(8, "小白"));
         }};
     }
+
+    /**
+     * 结论： final 只是不能修改 对象的 引用地址，对象的属性还能操作
+     */
     @Test
     public void finalListAddTest() {
         staticFinalList.add(new Dog(1, "小红花"));
-        System.out.println("dogList:" + staticFinalList.toString());
+        System.out.println("staticFinalList:" + staticFinalList.toString());
     }
+    /**
+     * 结论： final 只是不能修改 对象的 引用地址，对象的属性还能操作
+     */
     @Test
     public void finalListRemoveTest() {
         staticFinalList.remove(0);
-        System.out.println("dogList:" + staticFinalList.toString());
+        System.out.println("staticFinalList:" + staticFinalList.toString());
     }
 
 

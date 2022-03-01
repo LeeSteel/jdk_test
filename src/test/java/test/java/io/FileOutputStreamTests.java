@@ -1,5 +1,7 @@
 package test.java.io;
 
+import org.junit.jupiter.api.Test;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -13,12 +15,12 @@ import java.io.IOException;
  * @date: 2021/8/17 16:12
  * @Copyright: Copyright (c) 2019
  */
-public class FileOutputStreamTest {
-    public static void main(String[] args) {
-        doTest();
-    }
-
-    public static void doTest() {
+public class FileOutputStreamTests {
+    /**
+     *  测试 tryResources 中关闭  FileOutputStream
+     */
+    @Test
+    public void tryResourcesCloseTest() {
         String logFileName = "d:test.txt";
         File logFile = new File(logFileName);
         String appendLog = "中文";
@@ -30,7 +32,11 @@ public class FileOutputStreamTest {
         }
     }
 
-    public static void doTestTwo() {
+    /**
+     *  测试 tryCatch 中关闭  FileOutputStream
+     */
+    @Test
+    public void tryCatchCloseTest() {
         String logFileName = "d:test.txt";
         File logFile = new File(logFileName);
         String appendLog = "中文";
