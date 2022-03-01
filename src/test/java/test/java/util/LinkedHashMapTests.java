@@ -20,5 +20,6 @@ public class LinkedHashMapTests {
         linkedHashMap.put(1, 1);
         linkedHashMap.put(2, 2);
         linkedHashMap.put(3, 3);
+        System.out.println(linkedHashMap);
     }
 }

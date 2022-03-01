@@ -5,7 +5,6 @@ import lombok.ToString;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -18,33 +17,23 @@ import java.util.List;
  * @Copyright: Copyright (c) 2019
  */
 public class FinalTests {
-    private static final List<Dog> dogList;
+    private static final List<Dog> staticFinalList;
 
     static {
-        dogList = new ArrayList() {{
+        staticFinalList = new ArrayList() {{
             add(new Dog(10, "小黑"));
             add(new Dog(8, "小白"));
         }};
     }
-
     @Test
-    public void unmodifiableListTest() {
-
-        List<Dog> tempDogList = Collections.unmodifiableList(dogList);
-        // tempDogList.add(new test.java.Dog(1, "小红花"));
-
-        Dog dog = tempDogList.get(0);
-        dog.setAge(99);
-
-        List<Dog> tempDogList2 = new ArrayList<>();
-        //   tempDogList2.addAll(tempDogList);
-
-        tempDogList2.add(new Dog(2, "小绿花"));
-
-        System.out.println("tempDogList:" + tempDogList.toString());
-        System.out.println("tempDogList2:" + tempDogList2.toString());
-        System.out.println("dogList:" + dogList.toString());
-
+    public void finalListAddTest() {
+        staticFinalList.add(new Dog(1, "小红花"));
+        System.out.println("dogList:" + staticFinalList.toString());
+    }
+    @Test
+    public void finalListRemoveTest() {
+        staticFinalList.remove(0);
+        System.out.println("dogList:" + staticFinalList.toString());
     }
 
 
