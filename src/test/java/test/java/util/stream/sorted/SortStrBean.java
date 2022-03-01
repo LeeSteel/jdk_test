@@ -1,4 +1,7 @@
 package test.java.util.stream.sorted;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 /**
  * @version V1.0
@@ -9,31 +12,11 @@ package test.java.util.stream.sorted;
  * @date: 2021/8/16 10:45
  * @Copyright: Copyright (c) 2019
  */
+
+@Data
+@ToString
+@EqualsAndHashCode
 public class SortStrBean {
     public String field_one;
     public String field_two;
-
-    public String getField_one() {
-        return field_one;
-    }
-
-    public void setField_one(String field_one) {
-        this.field_one = field_one;
-    }
-
-    public String getField_two() {
-        return field_two;
-    }
-
-    public void setField_two(String field_two) {
-        this.field_two = field_two;
-    }
-
-    @Override
-    public String toString() {
-        return "SortStrBean{" +
-                "field_one='" + field_one + '\'' +
-                ", field_two='" + field_two + '\'' +
-                '}';
-    }
 }
