@@ -1,5 +1,7 @@
 package test.java.text;
 
+import org.junit.jupiter.api.Test;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -16,26 +18,34 @@ import java.util.concurrent.TimeUnit;
  * @date: 2021/9/7 14:48
  * @Copyright: Copyright (c) 2019
  */
-public class SimpleDateFormatTest {
+public class SimpleDateFormatTests {
     private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     static ThreadPoolExecutor poolExecutor
             = new ThreadPoolExecutor(10, 100,
             1, TimeUnit.MINUTES, new LinkedBlockingQueue<>(1000));
 
-    public static void main(String[] args) {
-
-        while (true) {
+    /**
+     * 测试 SimpleDateFormat 是否线程安全
+     * 结论：线程不安全
+     */
+    @Test
+    public void threadSafeTest() {
+        int size = 10000;
+        for (int i = 0; i < size; i++) {
             poolExecutor.execute(() -> {
-                String dateString = simpleDateFormat.format(new Date());
+                String newDateStr = simpleDateFormat.format(new Date());
                 try {
-                    Date parseDate = simpleDateFormat.parse(dateString);
-                    String dateString2 = simpleDateFormat.format(parseDate);
-                    System.out.println(dateString.equals(dateString2));
+                    Date parseDate = simpleDateFormat.parse(newDateStr);
+                    String formatDateStr = simpleDateFormat.format(parseDate);
+                    System.out.println("formatNewDateStr   :" + newDateStr);
+                    System.out.println("formatParseDateStr :" + formatDateStr);
+                    System.out.println(newDateStr.equals(formatDateStr));
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
 
             });
         }
+
     }
 }

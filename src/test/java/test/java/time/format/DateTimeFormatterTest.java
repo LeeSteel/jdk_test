@@ -27,6 +27,7 @@ public class DateTimeFormatterTest {
 
     /**
      * 测试 DateTimeFormatter 是否线程安全
+     * 结论：线程安全
      */
     @Test
     public void threadSafeTest() {

@@ -1,5 +1,8 @@
 package test.java.util.hashmap;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -15,25 +18,28 @@ import java.util.Set;
  * @Copyright: Copyright (c) 2019
  */
 public class HashMapLoopTests {
+    Map<String, Object> loopData;
 
-    public static void main(String[] args) {
-        Map<String, Object> testMap = initData();
-        doTestLoop1(testMap);
-        doTestLoop2(testMap);
-        doTestLoop3(testMap);
-        doTestLoop4(testMap);
+    @BeforeEach
+    public void inintData() {
+        loopData = new HashMap<>();
+        loopData.put("1", 1);
+        loopData.put("2", 2);
+        loopData.put("3", 3);
+
     }
 
-    public static Map<String, Object> initData() {
-        Map<String, Object> testMap = new HashMap<>();
-        testMap.put("1", 1);
-        testMap.put("2", 2);
-        testMap.put("3", 3);
-        return testMap;
+    @Test
+    public void loopTest() {
+        loopForEntrySet(loopData);
+        loopForEntrySetIterator(loopData);
+        loopForKeySet(loopData);
+        loopForForEach(loopData);
     }
 
-    public static void doTestLoop1(Map<String, Object> map) {
-        System.out.println("循环方式1");
+
+    public static void loopForEntrySet(Map<String, Object> map) {
+        System.out.println("循环方式1 : Map.Entry");
         for (Map.Entry<String, Object> entry : map.entrySet()) {
             System.out.print("key:" + entry.getKey() + "\t");
             System.out.print("value:" + entry.getValue());
@@ -41,8 +47,8 @@ public class HashMapLoopTests {
         }
     }
 
-    public static void doTestLoop2(Map<String, Object> map) {
-        System.out.println("循环方式2");
+    public static void loopForEntrySetIterator(Map<String, Object> map) {
+        System.out.println("循环方式2 :map.entrySet().Iterator()");
         Iterator<Map.Entry<String, Object>> iterator = map.entrySet().iterator();
         while (iterator.hasNext()) {
             Map.Entry<String, Object> entry = iterator.next();
@@ -52,8 +58,8 @@ public class HashMapLoopTests {
         }
     }
 
-    public static void doTestLoop3(Map<String, Object> map) {
-        System.out.println("循环方式3");
+    public static void loopForKeySet(Map<String, Object> map) {
+        System.out.println("循环方式3 : map.keySet()");
         Set<String> keySet = map.keySet();
         for (String key : keySet) {
             System.out.print("key:" + key + "\t");
@@ -62,8 +68,8 @@ public class HashMapLoopTests {
         }
     }
 
-    public static void doTestLoop4(Map<String, Object> map) {
-        System.out.println("循环方式4");
+    public static void loopForForEach(Map<String, Object> map) {
+        System.out.println("循环方式4 : map.forEach");
         map.forEach((key, value) -> {
             System.out.print("key:" + key + "\t");
             System.out.print("value:" + value);
