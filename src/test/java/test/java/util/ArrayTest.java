@@ -1,5 +1,7 @@
 package test.java.util;
 
+import org.junit.jupiter.api.Test;
+
 /**
  * @version V1.0
  * @Title:
@@ -11,7 +13,8 @@ package test.java.util;
  */
 public class ArrayTest {
 
-    public static void main(String[] args){
+    @Test
+    public void errorInitLengthTest() {
         String[] strings = new String[-1];
     }
 }

@@ -1,5 +1,7 @@
 package test.java.util;
 
+import org.junit.jupiter.api.Test;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,11 +15,9 @@ import java.util.List;
  * @Copyright: Copyright (c) 2019
  */
 public class ArrayListTest {
-    public static void main(String[] args) {
-        doTestRemoveIndex();
-    }
 
-    public static void doTestRemoveIndex() {
+    @Test
+    public void doTestRemoveIndex() {
         List<String> list = new ArrayList<>();
         list.add("1");
         list.add("2");
@@ -26,15 +26,19 @@ public class ArrayListTest {
         for (int li = 0; li < list.size(); li++) {
             list.remove(li);
         }
+        System.out.println(list);
     }
 
     /**
      * 测试 指定初始化容量，添加到指定下标中
      */
-    public static void doTestIndexAdd() {
+    @Test
+    public void doTestIndexAdd() {
         ArrayList list = new ArrayList(4);
         Object obj1 = new Object();
         list.add(1, obj1);
+
+        System.out.println(list);
     }
 
 }

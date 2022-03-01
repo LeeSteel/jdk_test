@@ -1,5 +1,8 @@
 package test.java.util.stream.sorted;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -142,5 +145,23 @@ public class SortStrTest {
         sortStrBeanList.add(sortStrBean);
         return sortStrBeanList;
 
+    }
+
+    /**
+     * @version V1.0
+     * @Title:
+     * @Package
+     * @Description:
+     * @author: 李钢 2580704698@qq.com
+     * @date: 2021/8/16 10:45
+     * @Copyright: Copyright (c) 2019
+     */
+
+    @Data
+    @ToString
+    @EqualsAndHashCode
+    public static class SortStrBean {
+        public String field_one;
+        public String field_two;
     }
 }

@@ -1,5 +1,7 @@
 package test.java.util.stream.sorted;
 
+import org.junit.jupiter.api.Test;
+
 import java.util.Arrays;
 
 /**
@@ -12,7 +14,9 @@ import java.util.Arrays;
  * @Copyright: Copyright (c) 2019
  */
 public class TwoDimensionalArrayTest {
-    public static void main(String[] args) {
+
+    @Test
+    public void flatMapToIntTest() {
         int[][] arr = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
         int[] b = Arrays.stream(arr).flatMapToInt(x -> Arrays.stream(x)).toArray();
         System.out.println(Arrays.toString(b));
