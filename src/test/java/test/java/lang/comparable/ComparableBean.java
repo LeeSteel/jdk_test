@@ -1,5 +1,8 @@
 package test.java.lang.comparable;
 
+import lombok.Data;
+import lombok.ToString;
+
 import java.util.Objects;
 
 /**
@@ -11,26 +14,11 @@ import java.util.Objects;
  * @date: 2021/9/6 11:20
  * @Copyright: Copyright (c) 2019
  */
+@Data
+@ToString
 public class ComparableBean implements Comparable<ComparableBean> {
     private int date;
     private int time;
-
-    public int getDate() {
-        return date;
-    }
-
-    public void setDate(int date) {
-        this.date = date;
-    }
-
-    public int getTime() {
-        return time;
-    }
-
-    public void setTime(int time) {
-        this.time = time;
-    }
-
 
     @Override
     public int compareTo(ComparableBean o) {

@@ -1,5 +1,7 @@
 package test.java.lang;
 
+import org.junit.jupiter.api.Test;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,13 +17,11 @@ import java.util.List;
 public class ObjectTest implements Cloneable{
     private List<String> list = new ArrayList<>();
 
-    public static void main(String[] args) throws CloneNotSupportedException {
-        cloneTest();
-    }
     /**
      * clone 方法测试
      */
-    public static void cloneTest(){
+    @Test
+    public  void cloneTest()  throws CloneNotSupportedException{
         ObjectTest a = new ObjectTest();
         List<String> aList = new ArrayList<>();
         aList.add("A");

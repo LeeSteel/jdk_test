@@ -1,5 +1,7 @@
 package test.java.lang.comparable;
 
+import org.junit.jupiter.api.Test;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
@@ -15,11 +17,11 @@ import java.util.TreeMap;
  */
 public class ComparableTest {
 
-    public static void main(String[] args) {
-        TreeMap<ComparableBean, String> treeMap = new TreeMap<>( );
+    @Test
+    public void main() {
+        TreeMap<ComparableBean, String> treeMap = new TreeMap<>();
 
-        initData().stream().forEach(t -> treeMap.put(t, t.getDate()+" "+t.getTime()));
-
+        initData().stream().forEach(t -> treeMap.put(t, t.getDate() + " " + t.getTime()));
 
         System.out.println(treeMap.size());
         System.out.println(treeMap);

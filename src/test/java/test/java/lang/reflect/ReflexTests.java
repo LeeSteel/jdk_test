@@ -1,5 +1,6 @@
 package test.java.lang.reflect;
 
+import org.junit.jupiter.api.Test;
 import test.java.lang.reflect.domain.ReflexTestSonBean;
 
 import java.lang.reflect.Field;
@@ -18,19 +19,16 @@ import java.util.Map;
  * @date: 2021/9/1 11:15
  * @Copyright: Copyright (c) 2019
  */
-public class ReflexTest {
-    public static void main(String[] args) throws Exception {
-        doTest();
-        doGetMethodsTest();
-        doGetFieldsTest();
-    }
+public class ReflexTests {
+
 
     /**
      * 测试反射是否能够获取到父类属性
      *
      * @throws Exception
      */
-    public static void doGetFieldsTest() throws Exception {
+    @Test
+    public void getDeclaredFieldsTest() throws Exception {
 
         Class<?> testClass = Class.forName("test.java.lang.reflect.domain.ReflexTestSonBean");
         //getDeclaredFields() 可以拿到反射类中的公共字段、私有字段、保护字段、默认访问，但不获得继承的字段。
@@ -58,7 +56,8 @@ public class ReflexTest {
      *
      * @throws Exception
      */
-    public static void doGetMethodsTest() throws Exception {
+    @Test
+    public  void getMethodsTest() throws Exception {
 
         Class<?> testClass = Class.forName("test.java.lang.reflect.domain.ReflexTestSonBean");
         //getDeclaredMethods() 可以拿到反射类中的公共方法、私有方法、保护方法、默认访问，但不获得继承的方法。
@@ -86,11 +85,12 @@ public class ReflexTest {
     }
 
     /**
-     * 测试反射是否能够获取到私有方法
+     * 测试反射是否能够 执行 私有方法
      *
      * @throws Exception
      */
-    public static void doTest() throws Exception {
+    @Test
+    public  void privateMethodTest() throws Exception {
 
         Class<?> testClass = Class.forName("test.java.lang.reflect.domain.ReflexTestSonBean");
         Object instance = testClass.getDeclaredConstructor().newInstance();

@@ -1,5 +1,7 @@
 package test.java.util.hashset;
 
+import org.junit.jupiter.api.Test;
+
 import java.util.HashSet;
 
 /**
@@ -11,8 +13,9 @@ import java.util.HashSet;
  * @date: 2021/10/28 11:11
  * @Copyright: Copyright (c) 2019
  */
-public class HashSetTest {
-    public static void main(String[] args) {
+public class HashSetTests {
+    @Test
+    public void addTest() {
         HashSet<Object> hashSet = new HashSet();
         hashSet.add(new HashSetBean());
         hashSet.add(new HashSetBean());
