@@ -21,21 +21,16 @@ public class ObjectTest implements Cloneable{
      * clone 方法测试
      */
     @Test
-    public  void cloneTest()  throws CloneNotSupportedException{
+    public void cloneTest()  throws CloneNotSupportedException{
         ObjectTest a = new ObjectTest();
         List<String> aList = new ArrayList<>();
         aList.add("A");
         a.setList(aList);
 
-        ObjectTest b = null;
-        try {
-            /**
-             * 如果类 未实现 Cloneable 接口，调用 clone 方法时 会出现 CloneNotSupportedException 异常
-             */
-            b = (ObjectTest) a.clone();
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        /**
+         * 如果类 未实现 Cloneable 接口，调用 clone 方法时 会出现 CloneNotSupportedException 异常
+         */
+        ObjectTest b = (ObjectTest) a.clone();
         /**
          * Object 类的 clone方法  克隆 对象，对象的引用地址不同，
          * 对象的 引用类型属性，还是同一份，其引用地址相同，如果想不同需要 自己重写 Object.clone 方法
