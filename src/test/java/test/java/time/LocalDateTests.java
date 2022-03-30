@@ -16,11 +16,12 @@ import java.time.temporal.ChronoUnit;
  * @date: 2021/6/2 14:28
  * @Copyright: Copyright (c) 2019
  */
-public class LocalDateTest {
+public class LocalDateTests {
 
     static DateTimeFormatter yyyyMMdd = DateTimeFormatter.ofPattern("yyyyMMdd");
 
-    public static void main(String[] args) {
+    @Test
+    public void  test() {
         String beginDateStr = "20210831";
         String endDateStr = "20211001";
         System.out.println(calcMonthBetween(LocalDate.parse(beginDateStr, yyyyMMdd),
