@@ -1,5 +1,7 @@
 package test.java.lang.threadlocal;
 
+import org.junit.jupiter.api.Test;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.ExecutorService;
@@ -16,7 +18,7 @@ import java.util.concurrent.TimeUnit;
  * @date: 2021/9/7 13:21
  * @Copyright: Copyright (c) 2019
  */
-public class ThreadLocalWithInitialTest {
+public class ThreadLocalWithInitialTests {
     public static ThreadLocal<SimpleDateFormat> dateFormatThreadLocal
             = ThreadLocal.withInitial(() -> new SimpleDateFormat("mm:ss"));
 
@@ -25,12 +27,12 @@ public class ThreadLocalWithInitialTest {
     public static ExecutorService threadPool = new ThreadPoolExecutor(16, 16,
             0L, TimeUnit.MILLISECONDS,
             new LinkedBlockingQueue<Runnable>());
-
-    public static void main(String[] args) throws Exception {
+    @Test
+    public  void test() throws Exception {
         for (int i = 0; i < 100; i++) {
             int finalI = i;
             threadPool.submit(() -> {
-                String data = new ThreadLocalWithInitialTest().formatDate(finalI);
+                String data = new ThreadLocalWithInitialTests().formatDate(finalI);
                 System.out.println(Thread.currentThread().getName() + " " + data);
             });
              Thread.sleep(10);
