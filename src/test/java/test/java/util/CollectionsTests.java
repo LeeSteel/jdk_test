@@ -8,6 +8,7 @@ import test.java.FinalTests;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 /**
  * @version V1.0
@@ -27,6 +28,61 @@ public class CollectionsTests {
             add(new FinalTests.Dog(8, "小白"));
         }};
     }
+    /**
+     * 集合工具类 排序 sort 测试
+     */
+    @Test
+    public void sortTest() {
+        List<Integer> list = new ArrayList<>();
+        int size = 10;
+        Random random = new Random();
+        for (int i = 0; i < size; i++) {
+            list.add(random.nextInt(100));
+        }
+        Collections.sort(list);
+
+        System.out.println(list.toString());
+
+    }
+    /**
+     * 集合工具类 二分查找 binarySearch 测试
+     */
+    @Test
+    public void binarySearchTest() {
+        List<Integer> list = new ArrayList<>();
+        int size = 10000;
+        Random random = new Random();
+        for (int i = 0; i < size; i++) {
+            list.add(random.nextInt(100));
+        }
+        System.out.println(list.toString());
+        Collections.sort(list);
+        System.out.println(list.toString());
+
+        long begin = System.currentTimeMillis();
+        System.out.println(Collections.binarySearch(list,list.get(0)));
+        long end = System.currentTimeMillis();
+
+        System.out.println(begin-end);
+
+    }
+    /**
+     * 集合工具类 翻转 reverse 测试
+     */
+    @Test
+    public void reverseTest() {
+        List<Integer> list = new ArrayList<>();
+        int size = 1000;
+        Random random = new Random();
+        for (int i = 0; i < size; i++) {
+            list.add(random.nextInt(100));
+        }
+        System.out.println(list.toString());
+        Collections.reverse(list);
+        System.out.println(list.toString());
+
+
+    }
 
     /**
      * 集合工具类 混淆 shuffle 测试
@@ -44,6 +100,9 @@ public class CollectionsTests {
         }
     }
 
+    /**
+     * 集合工具类  不能修改 unmodifiableList 测试
+     */
     @Test
     public void unmodifiableListAddTest() {
 

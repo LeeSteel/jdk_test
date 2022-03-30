@@ -26,5 +26,10 @@ public class StringTests {
         String t = "google";
         System.out.println(s.indexOf(t));
     }
+    @Test
+    public void formatTest() {
+        String s = "123";
+        System.out.println(String.format("%-4s",s));
+    }
 
 }
