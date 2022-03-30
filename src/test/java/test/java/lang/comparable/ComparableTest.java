@@ -1,6 +1,7 @@
 package test.java.lang.comparable;
 
 import org.junit.jupiter.api.Test;
+import test.java.lang.comparable.domain.ComparableBean;
 
 import java.util.ArrayList;
 import java.util.List;

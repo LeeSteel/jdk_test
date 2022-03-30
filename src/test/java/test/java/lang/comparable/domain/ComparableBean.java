@@ -1,4 +1,4 @@
-package test.java.lang.comparable;
+package test.java.lang.comparable.domain;
 
 import lombok.Data;
 import lombok.ToString;

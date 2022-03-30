@@ -1,6 +1,8 @@
 package test.java.lang.threadlocal;
 
 
+import org.junit.jupiter.api.Test;
+
 /**
  * @version V1.0
  * @Title:
@@ -10,9 +12,10 @@ package test.java.lang.threadlocal;
  * @date: 2021/9/7 14:00
  * @Copyright: Copyright (c) 2019
  */
-public class ThreadLocalTest1 {
+public class ThreadLocalTests {
 
-    public static void main(String[] args) throws InterruptedException {
+    @Test
+    public void threadLocalTests() throws InterruptedException {
         ThreadLocal<String> threadLocal =new ThreadLocal<>();
 
         Thread threadA = new Thread(() -> {
