@@ -1,5 +1,7 @@
 package test.java.io;
 
+import org.junit.jupiter.api.Test;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -15,12 +17,9 @@ import java.io.Writer;
  * @date: 2021/8/17 16:12
  * @Copyright: Copyright (c) 2019
  */
-public class OutputStreamWriterTest {
-    public static void main(String[] args) {
-        doTest();
+public class OutputStreamWriterTests {
 
-    }
-
+    @Test
     public static void doTest() {
         String logFileName = "d:test.txt";
         File logFile = new File(logFileName);
@@ -35,7 +34,7 @@ public class OutputStreamWriterTest {
         }
 
     }
-
+    @Test
     public static void doTestTwo() {
         String logFileName = "d:test.txt";
         File logFile = new File(logFileName);
