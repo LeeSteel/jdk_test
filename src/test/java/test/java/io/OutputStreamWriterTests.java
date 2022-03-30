@@ -20,7 +20,7 @@ import java.io.Writer;
 public class OutputStreamWriterTests {
 
     @Test
-    public static void doTest() {
+    public void doTest() {
         String logFileName = "d:test.txt";
         File logFile = new File(logFileName);
         String appendLog = "中文";
@@ -35,7 +35,7 @@ public class OutputStreamWriterTests {
 
     }
     @Test
-    public static void doTestTwo() {
+    public void doTestTwo() {
         String logFileName = "d:test.txt";
         File logFile = new File(logFileName);
         String appendLog = "中文";
