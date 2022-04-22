@@ -78,7 +78,31 @@ public class StreamTests {
 
     }
 
+    @Test
+    public void skipTest() {
+        int skipSize = 2;
+        List<Integer> list = Stream.of(1, 2, 3, 3).collect(Collectors.toList());
+        System.out.println(list.stream().skip(skipSize).collect(Collectors.toList()));
 
+        // skipSize 可以比 流元素数量大,此时返回 空流
+        skipSize = 6;
+        list = Stream.of(1, 2, 3, 3).collect(Collectors.toList());
+        System.out.println(list.stream().skip(skipSize).collect(Collectors.toList()));
+
+        //
+        skipSize = 0;
+        list = Stream.of(1, 2, 3, 3).collect(Collectors.toList());
+        System.out.println(list.stream().skip(skipSize).collect(Collectors.toList()));
+
+        // skipSize 不能小于0
+    }
+
+
+    @Test
+    public void forEachTest() {
+        List<Integer> list = Stream.of(1, 2, 3, 3).collect(Collectors.toList());
+        list.stream().forEach(System.out::println);
+    }
 
     private List<StreamBean> getStreamBeanList(){
         List<StreamBean> beanList =new ArrayList<>();
