@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -83,16 +85,19 @@ public class StreamTests {
         int skipSize = 2;
         List<Integer> list = Stream.of(1, 2, 3, 3).collect(Collectors.toList());
         System.out.println(list.stream().skip(skipSize).collect(Collectors.toList()));
+        System.out.println(list.parallelStream().skip(skipSize).collect(Collectors.toList()));
 
         // skipSize 可以比 流元素数量大,此时返回 空流
         skipSize = 6;
         list = Stream.of(1, 2, 3, 3).collect(Collectors.toList());
         System.out.println(list.stream().skip(skipSize).collect(Collectors.toList()));
+        System.out.println(list.parallelStream().skip(skipSize).collect(Collectors.toList()));
 
         //
         skipSize = 0;
         list = Stream.of(1, 2, 3, 3).collect(Collectors.toList());
         System.out.println(list.stream().skip(skipSize).collect(Collectors.toList()));
+        System.out.println(list.parallelStream().skip(skipSize).collect(Collectors.toList()));
 
         // skipSize 不能小于0
     }
@@ -101,7 +106,83 @@ public class StreamTests {
     @Test
     public void forEachTest() {
         List<Integer> list = Stream.of(1, 2, 3, 3).collect(Collectors.toList());
-        list.stream().forEach(System.out::println);
+        list.stream().forEach(System.out::print);
+        System.out.println();
+        list.parallelStream().forEach(System.out::print);
+    }
+
+    @Test
+    public void forEachOrderedTest() {
+        List<Integer> list = Stream.of(4, 5, 1, 6, 2, 3).collect(Collectors.toList());
+        //forEachOrdered 对于普通流 和 forEach 无区别
+        list.stream().forEachOrdered(System.out::print);
+        System.out.println();
+        //forEachOrdered 在并行流处理的时候，保证元素的顺序
+        list.parallelStream().forEachOrdered(System.out::print);
+    }
+
+    @Test
+    public void anyMatchTest() {
+        List<Integer> list = Stream.of(-1, -2, 4, 5, 1, 6, 2, 3).collect(Collectors.toList());
+        //条件函数
+        Predicate<Integer> predicate = t -> t > 0;
+        // anyMatch 流里面任意一个元素 满足条件
+        if (list.stream().anyMatch(predicate)) {
+            //打印满足条件的元素
+            System.out.println(list.stream().filter(predicate).collect(Collectors.toList()));
+        }
+    }
+
+
+    @Test
+    public void allMatchTest() {
+        List<Integer> list = Stream.of(-1, -2, 4, 5, 1, 6, 2, 3).collect(Collectors.toList());
+        //条件函数
+        Predicate<Integer> predicate = t -> t > 0;
+        // allMatch 流里面 所有元素 满足条件
+        if (list.stream().allMatch(predicate)) {
+            //打印满足条件的元素
+            System.out.println(list.stream().filter(predicate).collect(Collectors.toList()));
+        }
+    }
+    @Test
+    public void noneMatchTest() {
+        List<Integer> list = Stream.of(-1, -2, 4, 5, 1, 6, 2, 3).collect(Collectors.toList());
+        //条件函数
+        Predicate<Integer> predicate = t -> t > 0;
+        Predicate<Integer> contraryPredicate = t -> t < 0;
+        // noneMatch 流里面 所有元素都 不满足条件
+        if (list.stream().noneMatch(predicate)) {
+            //打印 不满足条件的元素
+            System.out.println(list.stream().filter(contraryPredicate).collect(Collectors.toList()));
+        }
+
+        list = Stream.of(-1, -2, -3).collect(Collectors.toList());
+         // noneMatch 流里面 所有元素都 不满足条件
+        if (list.stream().noneMatch(predicate)) {
+            //打印 不满足条件的元素
+            System.out.println(list.stream().filter(contraryPredicate).collect(Collectors.toList()));
+        }
+    }
+
+    @Test
+    public void findFirstTest() {
+        List<Integer> list = Stream.of(-1, -2, 4, 5, 1, 6, 2, 3).collect(Collectors.toList());
+        //找到第一个元素
+        list.stream().findFirst()
+                //如果存在值，就打印出来
+                .ifPresent(System.out::print);
+        System.out.println();
+        Set<Integer> set = Stream.of(19, 0, -3, -1, -2, 4, 5, 1, 6, 2, 3, 18, 7, 9, 8, 10, 13, 12, 14, 16)
+                .collect(Collectors.toSet());
+
+        //找到第一个元素
+        set.stream().findFirst()
+                //如果存在值，就打印出来
+                .ifPresent(System.out::print);
+        System.out.println();
+        System.out.println(set.toString());
+
     }
 
     private List<StreamBean> getStreamBeanList(){

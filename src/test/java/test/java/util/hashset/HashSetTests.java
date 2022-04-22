@@ -3,6 +3,7 @@ package test.java.util.hashset;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
+import java.util.stream.Collectors;
 
 /**
  * @version V1.0
@@ -21,5 +22,15 @@ public class HashSetTests {
         hashSet.add(new HashSetBean());
         hashSet.add(new HashSetBean());
         System.out.println(hashSet.size());
+    }
+
+    @Test
+    public void addIntegerTest() {
+        HashSet<Integer> hashSet = new HashSet();
+        hashSet.add(1);
+        hashSet.add(18);
+        hashSet.add(2);
+        hashSet.add(3);
+        hashSet.stream().forEach(System.out::println);
     }
 }
