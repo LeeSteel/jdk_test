@@ -35,8 +35,8 @@ public class ArrayListTests {
     @Test
     public void initAndIndexAdd() {
         ArrayList list = new ArrayList(4);
-        Object obj1 = new Object();
-        list.add(1, obj1);
+
+        list.add(1,  new Object());
 
         System.out.println(list);
     }

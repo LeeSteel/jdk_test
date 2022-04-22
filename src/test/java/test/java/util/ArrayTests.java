@@ -17,4 +17,11 @@ public class ArrayTests {
     public void errorInitLengthTest() {
         String[] strings = new String[-1];
     }
+
+
+    @Test
+    public void arrayLengthTest() {
+        String[] strings = new String[10];
+        System.out.println(strings.length);
+    }
 }

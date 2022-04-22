@@ -18,6 +18,7 @@ public class HashSetTests {
      * 添加 null 值 测试
      */
     @Test
+
     public void addNullValueTest() {
         HashSet hashSet = new HashSet();
         System.out.println(hashSet.add(null));
