@@ -173,6 +173,8 @@ public class StreamTests {
                 //如果存在值，就打印出来
                 .ifPresent(System.out::print);
         System.out.println();
+
+        //数据量 太少不会触发扩容,不会重新计算 hash ,可能出现 伪有序
         Set<Integer> set = Stream.of(19, 0, -3, -1, -2, 4, 5, 1, 6, 2, 3, 18, 7, 9, 8, 10, 13, 12, 14, 16)
                 .collect(Collectors.toSet());
 
