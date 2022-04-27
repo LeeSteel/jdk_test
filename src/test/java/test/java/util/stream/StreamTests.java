@@ -3,6 +3,7 @@ package test.java.util.stream;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -165,11 +166,20 @@ public class StreamTests {
         }
     }
 
+    /**
+     *  findFirst 会找 流里面的 第一个元素
+     *  并行流 parallelStream 和 同步流 stream 结果一致
+     */
     @Test
     public void findFirstTest() {
         List<Integer> list = Stream.of(-1, -2, 4, 5, 1, 6, 2, 3).collect(Collectors.toList());
         //找到第一个元素
         list.stream().findFirst()
+                //如果存在值，就打印出来
+                .ifPresent(System.out::print);
+        System.out.println();
+        //找到第一个元素
+        list.parallelStream().findFirst()
                 //如果存在值，就打印出来
                 .ifPresent(System.out::print);
         System.out.println();
@@ -180,6 +190,47 @@ public class StreamTests {
 
         //找到第一个元素
         set.stream().findFirst()
+                //如果存在值，就打印出来
+                .ifPresent(System.out::print);
+        System.out.println();
+        //找到第一个元素
+        set.parallelStream().findFirst()
+                //如果存在值，就打印出来
+                .ifPresent(System.out::print);
+        System.out.println();
+        System.out.println(set.toString());
+
+    }
+
+    /**
+     *  findAny 会找 流里面的 任意一个元素
+     *  同步流 stream 中  等同于  findFirst
+     *  并行流 parallelStream 中 则不保证 获取顺序
+     */
+    @Test
+    public void findAnyTest() {
+        List<Integer> list = Stream.of(-1, -2, 4, 5, 1, 6, 2, 3).collect(Collectors.toList());
+        //找到第一个元素
+        list.stream().findAny()
+                //如果存在值，就打印出来
+                .ifPresent(System.out::print);
+        System.out.println();
+        //找到第一个元素
+        list.parallelStream().findAny()
+                //如果存在值，就打印出来
+                .ifPresent(System.out::print);
+        System.out.println();
+        //数据量 太少不会触发扩容,不会重新计算 hash ,可能出现 伪有序
+        Set<Integer> set = Stream.of(19, 0, -3, -1, -2, 4, 5, 1, 6, 2, 3, 18, 7, 9, 8, 10, 13, 12, 14, 16)
+                .collect(Collectors.toSet());
+
+        //找到第一个元素
+        set.stream().findAny()
+                //如果存在值，就打印出来
+                .ifPresent(System.out::print);
+        System.out.println();
+        //找到第一个元素
+        set.parallelStream().findAny()
                 //如果存在值，就打印出来
                 .ifPresent(System.out::print);
         System.out.println();
