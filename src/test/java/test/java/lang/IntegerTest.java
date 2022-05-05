@@ -21,7 +21,7 @@ public class IntegerTest {
      */
 
     @Test
-    public void doTestEquals1_1() {
+    public void integerInCacheOperatorCompareTest() {
         Integer a = 127;
         Integer b = 127;
         System.out.println(" Integer a = 127;");
@@ -31,7 +31,7 @@ public class IntegerTest {
     }
 
     @Test
-    public void doTestEquals1_2() {
+    public void integerOutCacheOperatorCompareTest() {
         Integer a = 128;
         Integer b = 128;
         System.out.println(" Integer a = 128;");
@@ -43,7 +43,7 @@ public class IntegerTest {
     }
 
     @Test
-    public void doTestEquals2_1() {
+    public void intOperatorCompareTest() {
         int a = 127;
         int b = 127;
         System.out.println(" int a = 127;");
@@ -54,7 +54,7 @@ public class IntegerTest {
     }
 
     @Test
-    public void doTestEquals2_2() {
+    public void intIntegerInCacheOperatorCompareTest() {
         Integer a = 127;
         int b = 127;
         System.out.println(" Integer a = 127;");
@@ -66,7 +66,7 @@ public class IntegerTest {
     }
 
     @Test
-    public void doTestEquals3_1() {
+    public void newIntegerOutCacheOperatorCompareTest() {
         Integer a = new Integer(128);
         Integer b = new Integer(128);
         System.out.println(" Integer a = new Integer(128);");
@@ -77,7 +77,7 @@ public class IntegerTest {
     }
 
     @Test
-    public void doTestEquals3_2() {
+    public void newIntegerInCacheOperatorCompareTest() {
         Integer a = new Integer(127);
         Integer b = new Integer(127);
         System.out.println(" Integer a = new Integer(127);");
@@ -88,10 +88,53 @@ public class IntegerTest {
     }
 
     @Test
-    public void parseInt() {
+    public void parseIntOutIntegerMaxValueTest() {
         String str = "12345678910";
         //超过 int 最大的
         System.out.println(Integer.parseInt(str));
+    }
+
+    /**
+     *  compareTo
+     *  返回  -1 小于
+     *  返回  0  等于
+     *  返回  1  大于
+     */
+    @Test
+    public void compareToTest() {
+        Integer a = 1;
+        Integer b = 2;
+        /**
+         *  compareTo
+         *  返回  -1 小于
+         *  返回  0  等于
+         *  返回  1  大于
+         *
+         *  等同于 Integer.compare
+         */
+        System.out.println(a.compareTo(b));
+        System.out.println(b.compareTo(a));
+
+    }
+    /**
+     *  compare
+     *  返回  -1 小于
+     *  返回  0  等于
+     *  返回  1  大于
+     */
+    @Test
+    public void compareTest() {
+        Integer a = 1;
+        Integer b = 2;
+        /**
+         *  compare
+         *  返回  -1 小于
+         *  返回  0  等于
+         *  返回  1  大于
+         *
+         */
+        System.out.println(Integer.compare(a,b));
+        System.out.println(Integer.compare(b,a));
 
     }
 }

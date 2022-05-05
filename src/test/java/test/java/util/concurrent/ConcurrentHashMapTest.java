@@ -1,5 +1,7 @@
 package test.java.util.concurrent;
 
+import org.junit.jupiter.api.Test;
+
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -13,13 +15,18 @@ import java.util.concurrent.ConcurrentHashMap;
  * @Copyright: Copyright (c) 2019
  */
 public class ConcurrentHashMapTest {
-    public static void main(String[] args) {
+
+    @Test
+    public void initTest() {
         ConcurrentHashMap<String, String> concurrentHashMap = new ConcurrentHashMap<>(22);
 
         ConcurrentHashMap<String, String> concurrentHashMap1 = new ConcurrentHashMap<>(22, 0.75F, 1);
 
         Map<String, String> concurrentHashMap2 = new ConcurrentHashMap();
 
+        System.out.println(concurrentHashMap.size());
+        System.out.println(concurrentHashMap1.size());
+        System.out.println(concurrentHashMap2.size());
     }
 
 

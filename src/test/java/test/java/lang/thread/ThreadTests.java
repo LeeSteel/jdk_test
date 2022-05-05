@@ -17,31 +17,10 @@ public class ThreadTests {
     @Test
     public void joinTest(){
 
-        Thread threadA = new Thread(()->{
-            try {
-                Thread.sleep(1000L);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            System.out.println(Thread.currentThread().getName()+" is runing");
-        },"threadA");
-
-        Thread threadB = new Thread(()->{
-            try {
-                Thread.sleep(1000L);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            System.out.println(Thread.currentThread().getName()+" is runing");
-        },"threadB");
-        Thread threadC = new Thread(()->{
-            try {
-                Thread.sleep(1000L);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            System.out.println(Thread.currentThread().getName()+" is runing");
-        },"threadC");
+        Thread threadA = new Thread(new SleepRunnable(),"threadA");
+        Thread threadB = new Thread(new SleepRunnable(),"threadB");
+        Thread threadC = new Thread(new SleepRunnable(),"threadC");
+        
         threadA.start();
         threadB.start();
         threadC.start();
@@ -53,6 +32,17 @@ public class ThreadTests {
             e.printStackTrace();
         }
     }
+  class  SleepRunnable implements Runnable{
 
+      @Override
+      public void run() {
+          try {
+              Thread.sleep(1000L);
+          } catch (InterruptedException e) {
+              e.printStackTrace();
+          }
+          System.out.println(Thread.currentThread().getName()+" is runing");
+      }
+  }
 
 }
