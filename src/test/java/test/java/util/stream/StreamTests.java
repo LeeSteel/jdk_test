@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 /**
@@ -238,6 +239,16 @@ public class StreamTests {
 
     }
 
+    @Test
+    public void flatMapTest() {
+        List<String> list = Stream.of("A,B,C","D,E,F","G,H,I").collect(Collectors.toList());
+        //flatMap 把一个二维数组、计划,合并成一个流
+        List<String> collect = list.stream()
+                .flatMap(str -> Stream.of(str.split(",")))
+                .collect(Collectors.toList());
+
+        collect.stream().forEach(System.out::println);
+    }
     private List<StreamBean> getStreamBeanList(){
         List<StreamBean> beanList =new ArrayList<>();
         StreamBean  streamBean = new StreamBean();
