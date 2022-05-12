@@ -1,4 +1,4 @@
-package test.java;
+package example;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
