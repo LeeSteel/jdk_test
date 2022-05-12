@@ -1,5 +1,6 @@
 package test.java.util.hashmap;
 
+import org.junit.jupiter.api.Test;
 import test.java.util.HashKeyTestBean;
 
 import java.util.HashMap;
@@ -14,7 +15,7 @@ import java.util.Map;
  * @date: 2021/3/9 20:49
  * @Copyright: Copyright (c) 2019
  */
-public class HashMapTest {
+public class HashMapTests {
     /**
      * The maximum capacity, used if a higher value is implicitly specified
      * by either of the constructors with arguments.
@@ -22,7 +23,12 @@ public class HashMapTest {
      */
     static final int MAXIMUM_CAPACITY = 1 << 30;
 
-    public static void main(String[] args) {
+    /**
+     * 添加 Hash 冲突的 bean 测试
+     * 主要是观察 hash冲突时候的 HashMap 内部 Node链表  与红黑树的转化
+     */
+    @Test
+    public void putHashConflictBeanTest() {
 
         Map<HashKeyTestBean, Object> map = new HashMap<HashKeyTestBean, Object>();
 
@@ -42,19 +48,29 @@ public class HashMapTest {
         System.out.println(map.size());
     }
 
-    public static int size(int cap) {
+    @Test
+    public void tableSizeForTest() {
+        int cap = 8;
+        System.out.println(tableSizeFor(cap));
+         cap = 20;
+        System.out.println(tableSizeFor(cap));
+    }
 
+    /**
+     *  返回给定目标容量 最近的 2 次方。
+     *  同 java.util.HashMap 中 tableSizeFor(int cap) 方法
+     * @param cap
+     * @see java.util.HashMap 中 tableSizeFor(int cap) 方法
+     *
+     * @return
+     */
+    public int tableSizeFor(int cap) {
         int n = cap - 1;
         n |= n >>> 1;
-        System.out.println(n);
         n |= n >>> 2;
-        System.out.println(n);
         n |= n >>> 4;
-        System.out.println(n);
         n |= n >>> 8;
-        System.out.println(n);
         n |= n >>> 16;
-        System.out.println(n);
         return (n < 0) ? 1 : (n >= MAXIMUM_CAPACITY) ? MAXIMUM_CAPACITY : n + 1;
     }
 }
