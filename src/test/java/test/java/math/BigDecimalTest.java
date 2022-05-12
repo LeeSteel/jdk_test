@@ -15,8 +15,13 @@ import java.math.BigDecimal;
  */
 public class BigDecimalTest {
 
+    /**
+     * 测试 BigDecimal.valueOf(double) 精度是否准确
+     * 结论：
+     *  BigDecimal.valueOf(double) 精度是准确的
+     */
     @Test
-    public void valueOfTest() {
+    public void valueOfDoubleTest() {
         double value = 0.1;
         BigDecimal decimal = BigDecimal.valueOf(value);
         System.out.println(decimal.toString());
@@ -29,7 +34,7 @@ public class BigDecimalTest {
      * 尽量使用 BigDecimal.valueOf 来生成 BigDecimal
      */
     @Test
-    public void constructorTest() {
+    public void doubleConstructorPrecisionTest() {
         double value = 0.1;
         BigDecimal bigDecimalDouble = new BigDecimal(value);
         System.out.println(bigDecimalDouble.toString());
