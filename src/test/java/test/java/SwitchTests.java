@@ -2,6 +2,8 @@ package test.java;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Objects;
+
 /**
  * @version V1.0
  * @Title:
@@ -75,17 +77,17 @@ public class SwitchTests {
 
     public void doIfElseTest() {
         String value = "F";
-        if ("A".equals(value)) {
+        if (Objects.equals("A",value)) {
 
-        } else if ("B".equals(value)) {
+        } else if (Objects.equals("B",value)) {
 
-        } else if ("C".equals(value)) {
+        } else if (Objects.equals("C",value)) {
 
-        } else if ("D".equals(value)) {
+        } else if (Objects.equals("D",value)) {
 
-        } else if ("E".equals(value)) {
+        } else if (Objects.equals("E",value)) {
 
-        } else if ("F".equals(value)) {
+        } else if (Objects.equals("F",value)) {
 
         }
     }
