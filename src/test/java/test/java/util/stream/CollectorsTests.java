@@ -82,4 +82,23 @@ public class CollectorsTests {
         //内部使用 AbstractSet#equals 重写的equals 对比 Set 里面的每个元素是否相等
         System.out.println(Objects.equals(toSetSet,hashSet));
     }
+
+
+    @Test
+    public void joiningTest(){
+        //获得一个 HashSet
+        Set<String> toSetSet = Stream.of("A","B","C", "D","E","F", "G","H","I")
+                .collect(Collectors.toSet());
+        //Collectors#joining 按元素顺序拼接,使用 StringBuilder实现,线程不安全
+        System.out.println(toSetSet.stream().collect(Collectors.joining()));
+    }
+
+    @Test
+    public void joiningByDelimiterTest(){
+        //获得一个 HashSet
+        Set<String> toSetSet = Stream.of("A","B","C", "D","E","F", "G","H","I")
+                .collect(Collectors.toSet());
+        //Collectors#joining 按元素顺序拼接,使用 StringBuilder实现,线程不安全
+        System.out.println(toSetSet.stream().collect(Collectors.joining(",")));
+    }
 }
