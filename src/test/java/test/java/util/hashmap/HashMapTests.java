@@ -30,20 +30,16 @@ public class HashMapTests {
     @Test
     public void putHashConflictBeanTest() {
 
-        Map<HashKeyTestBean, Object> map = new HashMap<HashKeyTestBean, Object>();
+        Map<Object, Object> map = new HashMap<>();
 
+        int size = 23;
+        for (int i = 0; i < size; i++) {
+            map.put(i+"", new Object());
+        }
+        for (int i = 0; i < size; i++) {
+            map.put(new HashKeyTestBean(), new Object());
+        }
 
-        map.put(new HashKeyTestBean(), new Object());
-        map.put(new HashKeyTestBean(), new Object());
-        map.put(new HashKeyTestBean(), new Object());
-        map.put(new HashKeyTestBean(), new Object());
-        map.put(new HashKeyTestBean(), new Object());
-        map.put(new HashKeyTestBean(), new Object());
-        map.put(new HashKeyTestBean(), new Object());
-        map.put(new HashKeyTestBean(), new Object());
-        map.put(new HashKeyTestBean(), new Object());
-        map.put(new HashKeyTestBean(), new Object());
-        map.put(new HashKeyTestBean(), new Object());
 
         System.out.println(map.size());
     }
