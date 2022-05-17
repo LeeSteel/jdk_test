@@ -3,8 +3,10 @@ package test.java.util.stream;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -57,5 +59,27 @@ public class CollectorsTests {
 
         //内部使用 AbstractList#equals 重写的equals 对比list里面的每个元素是否相等
         System.out.println(Objects.equals(toListList,arrayList));
+    }
+
+
+    /**
+     * Collectors#toSet 方法,配合Stream 流使用,获得一个 HashSet
+     */
+    @Test
+    public void toSetTest() {
+        //想获得一个 HashSet
+        Set<String> toSetSet = Stream.of("A,B,C", "D,E,F", "G,H,I")
+                .collect(Collectors.toSet());
+        System.out.println(toSetSet.toString());
+        System.out.println(toSetSet.getClass());
+
+        //想获得一个 HashSet
+        Set<String> hashSet = Stream.of("A,B,C", "D,E,F", "G,H,I")
+                .collect(Collectors.toCollection((Supplier<Set<String>>) HashSet::new));
+        System.out.println(hashSet.toString());
+        System.out.println(hashSet.getClass());
+
+        //内部使用 AbstractSet#equals 重写的equals 对比 Set 里面的每个元素是否相等
+        System.out.println(Objects.equals(toSetSet,hashSet));
     }
 }
