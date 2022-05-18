@@ -3,6 +3,7 @@ package test.java.util.stream;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -11,7 +12,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Supplier;
-import java.util.jar.Attributes;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -61,7 +61,7 @@ public class CollectorsTests {
         System.out.println(arrayList.getClass());
 
         //内部使用 AbstractList#equals 重写的equals 对比list里面的每个元素是否相等
-        System.out.println(Objects.equals(toListList,arrayList));
+        System.out.println(Objects.equals(toListList, arrayList));
     }
 
 
@@ -83,14 +83,14 @@ public class CollectorsTests {
         System.out.println(hashSet.getClass());
 
         //内部使用 AbstractSet#equals 重写的equals 对比 Set 里面的每个元素是否相等
-        System.out.println(Objects.equals(toSetSet,hashSet));
+        System.out.println(Objects.equals(toSetSet, hashSet));
     }
 
 
     @Test
-    public void joiningTest(){
+    public void joiningTest() {
         //获得一个 HashSet
-        Set<String> toSetSet = Stream.of("A","B","C", "D","E","F", "G","H","I")
+        Set<String> toSetSet = Stream.of("A", "B", "C", "D", "E", "F", "G", "H", "I")
                 .collect(Collectors.toSet());
         //Collectors#joining 按元素顺序拼接,使用 StringBuilder实现,线程不安全
         System.out.println(toSetSet.stream().collect(Collectors.joining()));
@@ -99,12 +99,12 @@ public class CollectorsTests {
         System.out.println(toSetSet.stream().collect(Collectors.joining(",")));
 
         //Collectors#joining 按元素顺序拼接,使用 StringJoiner#StringBuilder实现,线程不安全
-        System.out.println(toSetSet.stream().collect(Collectors.joining(",","prefix","suffix")));
+        System.out.println(toSetSet.stream().collect(Collectors.joining(",", "prefix", "suffix")));
     }
 
 
     @Test
-    public void mappingTest(){
+    public void mappingTest() {
         List<StreamBean> beanList = getStreamBeanList();
         // demo 1
         // 获取集合里元素的名字 放至一个集合
@@ -134,9 +134,21 @@ public class CollectorsTests {
 
     }
 
-    private List<StreamBean> getStreamBeanList(){
-        List<StreamBean> beanList =new ArrayList<>();
-        StreamBean  streamBean = new StreamBean();
+
+    @Test
+    public void collectingAndThenTest() {
+        //获得一个 HashSet
+        Set<String> toSetSet = Stream.of("A", "B", "C", "D", "E", "F", "G", "H", "I")
+                .collect(Collectors.toSet());
+        toSetSet = toSetSet.stream().collect(Collectors.collectingAndThen(Collectors.toSet(), Collections::unmodifiableSet));
+        System.out.println(toSetSet);
+        System.out.println(toSetSet.getClass());
+    }
+
+
+    private List<StreamBean> getStreamBeanList() {
+        List<StreamBean> beanList = new ArrayList<>();
+        StreamBean streamBean = new StreamBean();
         streamBean.setId(1);
         streamBean.setName("Json");
 
@@ -158,6 +170,6 @@ public class CollectorsTests {
         streamBean.setName("Pony");
         beanList.add(streamBean);
 
-        return  beanList;
+        return beanList;
     }
 }
