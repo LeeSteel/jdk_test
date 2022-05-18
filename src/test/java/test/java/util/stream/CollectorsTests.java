@@ -3,12 +3,15 @@ package test.java.util.stream;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Supplier;
+import java.util.jar.Attributes;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -91,14 +94,70 @@ public class CollectorsTests {
                 .collect(Collectors.toSet());
         //Collectors#joining 按元素顺序拼接,使用 StringBuilder实现,线程不安全
         System.out.println(toSetSet.stream().collect(Collectors.joining()));
+
+        //Collectors#joining 按元素顺序拼接,使用 StringJoiner#StringBuilder实现,线程不安全
+        System.out.println(toSetSet.stream().collect(Collectors.joining(",")));
+
+        //Collectors#joining 按元素顺序拼接,使用 StringJoiner#StringBuilder实现,线程不安全
+        System.out.println(toSetSet.stream().collect(Collectors.joining(",","prefix","suffix")));
     }
 
+
     @Test
-    public void joiningByDelimiterTest(){
-        //获得一个 HashSet
-        Set<String> toSetSet = Stream.of("A","B","C", "D","E","F", "G","H","I")
-                .collect(Collectors.toSet());
-        //Collectors#joining 按元素顺序拼接,使用 StringBuilder实现,线程不安全
-        System.out.println(toSetSet.stream().collect(Collectors.joining(",")));
+    public void mappingTest(){
+        List<StreamBean> beanList = getStreamBeanList();
+        // demo 1
+        // 获取集合里元素的名字 放至一个集合
+        List<String> nameList = beanList.stream()
+                .collect(Collectors.mapping(StreamBean::getName, Collectors.toList()));
+        System.out.println(nameList);
+
+        // 获取集合里元素的名字 放至一个集合
+        nameList = beanList.stream()
+                .map(StreamBean::getName)
+                .collect(Collectors.toList());
+        System.out.println(nameList);
+
+        // demo 2
+        // 根据名字分组,把同名的人ID放到一个集合
+        Map<String, List<Integer>> groupMap
+                = beanList.stream()
+                .collect(Collectors.groupingBy(StreamBean::getName,
+                        Collectors.mapping(StreamBean::getId, Collectors.toList())));
+        System.out.println(groupMap);
+
+        //根据名字分组,把同名的人 bean对象 放到一个集合
+        Map<String, List<StreamBean>> groupBeanMap = beanList.stream()
+                .collect(Collectors.groupingBy(StreamBean::getName,
+                        HashMap::new, Collectors.toList()));
+        System.out.println(groupBeanMap);
+
+    }
+
+    private List<StreamBean> getStreamBeanList(){
+        List<StreamBean> beanList =new ArrayList<>();
+        StreamBean  streamBean = new StreamBean();
+        streamBean.setId(1);
+        streamBean.setName("Json");
+
+        beanList.add(streamBean);
+
+        streamBean = new StreamBean();
+        streamBean.setId(2);
+        streamBean.setName("Json");
+        beanList.add(streamBean);
+
+
+        streamBean = new StreamBean();
+        streamBean.setId(3);
+        streamBean.setName("Gust");
+        beanList.add(streamBean);
+
+        streamBean = new StreamBean();
+        streamBean.setId(4);
+        streamBean.setName("Pony");
+        beanList.add(streamBean);
+
+        return  beanList;
     }
 }
