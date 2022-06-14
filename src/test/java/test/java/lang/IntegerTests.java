@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
  * @date: 2021/6/4 16:54
  * @Copyright: Copyright (c) 2019
  */
-public class IntegerTest {
+public class IntegerTests {
     /**
      * 缓存以支持 JLS 要求的 -128 和 127（含）之间的值的自动装箱的对象标识语义。
      * 缓存在第一次使用时被初始化。
