@@ -29,8 +29,8 @@ public class StreamTests {
         Stream<String> stream = Stream.of("a", "b", "c");
         System.out.println(stream.collect(Collectors.toList()));
 
-        // Stream.of 生成的流 使用一次后就会被关闭
-        //System.out.println(stream.collect(Collectors.toList()));
+        // 流 使用一次后就会被关闭,这里再使用就报错了
+//        System.out.println(stream.collect(Collectors.toList()));
     }
 
     @Test
