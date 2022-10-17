@@ -2,6 +2,7 @@ package test.java.lang.reflect;
 
 import org.junit.jupiter.api.Test;
 import test.java.lang.reflect.domain.ReflexTestSonBean;
+import test.java.util.HashKeyTestBean;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -101,5 +102,31 @@ public class ReflexTests {
         //为true 关闭访问检查
         sonPriMethod.setAccessible(true);
         sonPriMethod.invoke(instance);
+    }
+
+    /**
+     * 测试反射是否能够 获取 私有属性
+     *
+     * @throws Exception
+     */
+    @Test
+    public  void privateHashMapFieldTest() throws Exception {
+        Map<Object, Object> map = new HashMap<>(2);
+        Class<? extends Map> mapClass = map.getClass();
+
+        Field tableField = mapClass.getDeclaredField("table");
+        tableField.setAccessible(true);
+
+        int insertSize = 23;
+        for (int i = 0; i < insertSize; i++) {
+            map.put(i+"", new Object());
+            /*
+                IDEA  Evaluate Expression 能够执行 ((HashMap.Node[]) tableField.get(map)).length
+                但是 实际无法编译通过
+                System.out.println(((HashMap.Node[]) tableField.get(map)).length);
+             */
+        }
+        System.out.println(map.size());
+
     }
 }
