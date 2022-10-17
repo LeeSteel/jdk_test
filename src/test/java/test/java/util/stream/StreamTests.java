@@ -71,12 +71,12 @@ public class StreamTests {
         List<Integer> list = Stream.of(1, 2, 3, 3).collect(Collectors.toList());
         System.out.println(list.stream().limit(limitMaxSize).collect(Collectors.toList()));
 
-        //测试 limit 大于 集合的情况
+        //测试 limit 大于 集合大小的情况, 正常执行并返回集合全部元素
         limitMaxSize = 6;
         list = Stream.of(1, 2, 3, 3).collect(Collectors.toList());
         System.out.println(list.stream().limit(limitMaxSize).collect(Collectors.toList()));
 
-         // limit 不能小于 0
+         // limit 不能小于 0, 小于0会抛出 IllegalArgumentException 异常
         limitMaxSize = 0;
         list = Stream.of(1, 2, 3, 3).collect(Collectors.toList());
         System.out.println(list.stream().limit(limitMaxSize).collect(Collectors.toList()));
@@ -114,6 +114,10 @@ public class StreamTests {
         list.parallelStream().forEach(System.out::print);
     }
 
+    /**
+     *  forEachOrdered 对于普通流 和 forEach 无区别
+     *  forEachOrdered 在并行流处理的时候，保证元素的顺序
+     */
     @Test
     public void forEachOrderedTest() {
         List<Integer> list = Stream.of(4, 5, 1, 6, 2, 3).collect(Collectors.toList());
