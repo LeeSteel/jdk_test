@@ -19,6 +19,12 @@ public class StringTests {
         logStr = logStr.replaceAll("[(server_version=\\w+)]", "***");
         System.out.println(logStr);
     }
+    @Test
+    public  void replaseTest() {
+        String logStr = "李某某";
+
+        System.out.println(logStr);
+    }
 
     @Test
     public void indexOfTest() {

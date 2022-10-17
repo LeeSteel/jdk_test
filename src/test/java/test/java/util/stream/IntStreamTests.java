@@ -16,6 +16,27 @@ import java.util.stream.IntStream;
 public class IntStreamTests {
 
     /**
+     * peek 查看流元素通过时的值,不会影响到原有值
+     */
+    @Test
+    public void peekTest() {
+        IntStream.of(1, 2, 3, 4)
+                .filter(e -> e > 2)
+                .peek(e -> System.out.println("Filtered value: " + e))
+                .map(e -> e * e)
+                .peek(e -> System.out.println("Mapped value: " + e))
+                .sum();
+    }
+
+    /**
+     * peek 查看流元素通过时的值,不会影响到原有值
+     */
+    @Test
+    public void reduceTest() {
+      int result =   IntStream.of(1, 2, 3, 4).reduce(0,(a,b)->a+b);
+        System.out.println(result);
+    }
+    /**
      * range 范围值,  不包含 结束值 [1,100)
      * 即  for (int i = startInclusive; i < endExclusive ; i++) { ... }
      */

@@ -1,10 +1,12 @@
 package test.java.text;
 
+import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -46,6 +48,18 @@ public class SimpleDateFormatTests {
 
             });
         }
+
+    }
+
+
+    @SneakyThrows
+    @Test
+    public void englishDateTest(){
+       // String pattern = "EEE MMM dd HH:mm:ss z yyyy";
+        String pattern = "MMM dd, yyyy";
+        SimpleDateFormat simpleDateFormat =
+                new SimpleDateFormat(pattern, Locale.ENGLISH);
+        System.out.println(simpleDateFormat.format(new Date()));
 
     }
 }
