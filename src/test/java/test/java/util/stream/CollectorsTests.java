@@ -134,6 +134,24 @@ public class CollectorsTests {
 
     }
 
+    @Test
+    public void groupingByTest() {
+        List<StreamBean> beanList = getStreamBeanList();
+
+        // 根据名字分组,把同名的人ID放到一个集合
+        Map<String, List<Integer>> groupMap
+                = beanList.stream()
+                .collect(Collectors.groupingBy(StreamBean::getName,
+                        Collectors.mapping(StreamBean::getId, Collectors.toList())));
+        System.out.println(groupMap);
+
+        //根据名字分组,把同名的人 bean对象 放到一个集合
+        Map<String, List<StreamBean>> groupBeanMap = beanList.stream()
+                .collect(Collectors.groupingBy(StreamBean::getName,
+                        HashMap::new, Collectors.toList()));
+        System.out.println(groupBeanMap);
+
+    }
 
     @Test
     public void collectingAndThenTest() {

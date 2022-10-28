@@ -83,11 +83,16 @@ public class StreamTests {
 
     }
 
+    /**
+     * 在丢弃流的第一个 n 元素后，返回由该流的其余元素组成的流。
+     * 如果此流包含的元素少于 n，则将返回一个空流。
+     */
     @Test
     public void skipTest() {
         int skipSize = 2;
         List<Integer> list = Stream.of(1, 2, 3, 3).collect(Collectors.toList());
         System.out.println(list.stream().skip(skipSize).collect(Collectors.toList()));
+        list.stream().skip(skipSize).forEach(System.out::println);
         System.out.println(list.parallelStream().skip(skipSize).collect(Collectors.toList()));
 
         // skipSize 可以比 流元素数量大,此时返回 空流
