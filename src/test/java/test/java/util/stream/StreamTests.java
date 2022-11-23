@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -31,6 +32,14 @@ public class StreamTests {
 
         // 流 使用一次后就会被关闭,这里再使用就报错了
 //        System.out.println(stream.collect(Collectors.toList()));
+
+        String charStr = "1,2,3";
+        List<Long> charList = Stream.of(charStr.split(","))
+                .filter(Objects::nonNull)
+                .map(Long::parseLong)
+                .collect(Collectors.toList());
+        System.out.println(charList);
+
     }
 
     @Test

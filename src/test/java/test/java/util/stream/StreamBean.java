@@ -1,6 +1,9 @@
 package test.java.util.stream;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 
 /**
@@ -13,6 +16,9 @@ import lombok.Data;
  * @Copyright: Copyright (c) 2019
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class StreamBean {
     private int id;
     private String name;

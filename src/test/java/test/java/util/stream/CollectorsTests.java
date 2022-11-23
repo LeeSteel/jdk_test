@@ -1,5 +1,6 @@
 package test.java.util.stream;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -25,6 +27,11 @@ import java.util.stream.Stream;
  * @Copyright: Copyright (c) 2019
  */
 public class CollectorsTests {
+    List<StreamBean> basicBeanList = new ArrayList<>();
+    @BeforeEach
+    public void initBasicData(){
+        basicBeanList = getStreamBeanList();
+    }
     /**
      * Collectors#toCollection 方法,配合 Stream 流使用,获得一个想要的 Collection
      */
@@ -163,6 +170,96 @@ public class CollectorsTests {
         System.out.println(toSetSet.getClass());
     }
 
+    /**
+     * 简单的 Collectors.toMap 测试
+     */
+    @Test
+    public void toMapSimpleTest(){
+        List<StreamBean> list = new ArrayList<>();
+        list.add(new StreamBean( 1,"牧羊犬"));
+        list.add(new StreamBean( 2,"哈士奇"));
+        list.add(new StreamBean( 3,"田园犬"));
+
+        // to map,key是bean的name,  value 是bean的 id
+        Map<String, Integer> beanNameMap = list.stream()
+                .collect(Collectors.toMap(StreamBean::getName, StreamBean::getId));
+        System.out.println(beanNameMap);
+
+        // to map,key是bean的name,  value 是bean
+        Map<String, StreamBean> beanMap = list.stream()
+                .collect(Collectors.toMap(StreamBean::getName, bean -> bean));
+        System.out.println(beanMap);
+    }
+
+    @Test
+    public void toMapDuplicateKeyExceptionTest(){
+        List<StreamBean> list = new ArrayList<>();
+        list.add(new StreamBean( 1,"牧羊犬"));
+        list.add(new StreamBean( 2,"哈士奇"));
+        list.add(new StreamBean( 3,"哈士奇"));
+        list.add(new StreamBean( 4,"田园犬"));
+
+        // to map,key是bean的name,  value 是bean
+        // key冲突时抛出异常
+        Map<String, StreamBean> beanMap = list.stream()
+                .collect(Collectors.toMap(StreamBean::getName, bean -> bean));
+
+        System.out.println(beanMap);
+    }
+
+    /**
+     * Collectors.toMap时，重复key使用 自定义合并函数合并
+     */
+    @Test
+    public void toMapDuplicateKeyMergeFunctionTest(){
+        List<StreamBean> list = new ArrayList<>();
+        list.add(new StreamBean( 1,"牧羊犬"));
+        list.add(new StreamBean( 2,"哈士奇"));
+        list.add(new StreamBean( 3,"哈士奇"));
+        list.add(new StreamBean( 4,"田园犬"));
+
+        // to map,key是bean的name,  value 是bean
+        // key冲突时 保留新数据
+        Map<String, StreamBean> beanMap = list.stream()
+                .collect(Collectors.toMap(StreamBean::getName, bean -> bean,(oldData,newData)->newData));
+
+        System.out.println(beanMap);
+    }
+
+    /**
+     * Collectors.toMap时，  自定义 返回的map
+     */
+    @Test
+    public void toMapSupplierFunctionTest(){
+        List<StreamBean> list = new ArrayList<>();
+        list.add(new StreamBean( 1,"牧羊犬"));
+        list.add(new StreamBean( 2,"哈士奇"));
+        list.add(new StreamBean( 3,"哈士奇"));
+        list.add(new StreamBean( 4,"田园犬"));
+
+        // to map,key是bean的name,  value 是bean
+        // 测试使用  指定的函数生成Map 接受返回值
+        Map<String, StreamBean> beanMap = list.stream()
+                .collect(Collectors.toMap(StreamBean::getName,
+                        bean -> bean,(oldData,newData)->newData,HashMap::new));
+        System.out.println(beanMap.getClass());
+        System.out.println(beanMap);
+
+        beanMap = list.stream()
+                .collect(Collectors.toMap(StreamBean::getName,
+                        bean -> bean,(oldData,newData)->newData,
+                        ConcurrentHashMap::new));
+        System.out.println(beanMap.getClass());
+        System.out.println(beanMap);
+
+        // 等于下面的写法
+        beanMap = list.stream()
+                .collect(Collectors.toMap(StreamBean::getName,
+                        bean -> bean,(oldData,newData)->newData,
+                        ()->new ConcurrentHashMap<>()));
+        System.out.println(beanMap.getClass());
+        System.out.println(beanMap);
+    }
 
     private List<StreamBean> getStreamBeanList() {
         List<StreamBean> beanList = new ArrayList<>();
