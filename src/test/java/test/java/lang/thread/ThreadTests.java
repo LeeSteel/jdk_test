@@ -20,14 +20,25 @@ public class ThreadTests {
         Thread threadA = new Thread(new SleepRunnable(),"threadA");
         Thread threadB = new Thread(new SleepRunnable(),"threadB");
         Thread threadC = new Thread(new SleepRunnable(),"threadC");
-        
+
+
+
         threadA.start();
         threadB.start();
         threadC.start();
         try {
+            // 这里不能保证顺序打印 ABC,因为 ABC线程同时启动，分配的执行片不定
+
             threadA.join();
+            System.out.println("threadA is joined");
+
+
             threadB.join();
+            System.out.println("threadB is joined");
+
+
             threadC.join();
+            System.out.println("threadC is joined");
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

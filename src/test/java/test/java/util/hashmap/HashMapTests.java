@@ -44,11 +44,16 @@ public class HashMapTests {
         System.out.println(map.size());
     }
 
+    /**
+     * 测试 HashMap 初始 tableSize阈值
+     */
     @Test
     public void tableSizeForTest() {
-        int cap = 8;
+        int cap = 2;
         System.out.println(tableSizeFor(cap));
-         cap = 20;
+        cap = 8;
+        System.out.println(tableSizeFor(cap));
+        cap = 20;
         System.out.println(tableSizeFor(cap));
     }
 
