@@ -41,4 +41,13 @@ public class ArrayListTests {
         System.out.println(list);
     }
 
+    @Test
+    public void addNull(){
+        ArrayList list = new ArrayList(4);
+        list.add(null);
+        list.add(null);
+        list.add(null);
+        System.out.println(list.size());
+    }
+
 }
