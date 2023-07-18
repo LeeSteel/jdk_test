@@ -107,6 +107,20 @@ public class CollectorsTests {
 
         //Collectors#joining 按元素顺序拼接,使用 StringJoiner#StringBuilder实现,线程不安全
         System.out.println(toSetSet.stream().collect(Collectors.joining(",", "prefix", "suffix")));
+
+        toSetSet.clear();
+        // 清除后再验证
+        System.out.println("==============================验证 空集合 joining=======================================");
+
+        //Collectors#joining 按元素顺序拼接,使用 StringBuilder实现,线程不安全
+        System.out.println(toSetSet.stream().collect(Collectors.joining()));
+
+        //Collectors#joining 按元素顺序拼接,使用 StringJoiner#StringBuilder实现,线程不安全
+        System.out.println(toSetSet.stream().collect(Collectors.joining(",")));
+
+        //Collectors#joining 按元素顺序拼接,使用 StringJoiner#StringBuilder实现,线程不安全
+        System.out.println(toSetSet.stream().collect(Collectors.joining(",", "prefix", "suffix")));
+
     }
 
 
