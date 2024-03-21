@@ -22,8 +22,8 @@ public class LibToMavenUtil {
 
 
     public static void main(String[] args) {
-        String libPath = "F:\\idea-workspace\\newvane-projects\\mishu_202304\\mishu_ppt_app\\src\\main\\webapp\\WEB-INF\\lib";
-        String targetPath = "${project.basedir}/src/main/webapp/WEB-INF/lib/";
+        String libPath = "F:\\idea-workspace\\newvane-projects\\xby\\learn-app\\src\\main\\lib";
+        String targetPath = "${project.basedir}/src/main/lib/";
         printMavenDependency(selectLibNameList(libPath), targetPath);
     }
 

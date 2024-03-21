@@ -50,4 +50,18 @@ public class ArrayListTests {
         System.out.println(list.size());
     }
 
+    @Test
+    public void nullForEach(){
+        ArrayList list = new ArrayList();
+        list.add(null);
+        list.add(null);
+        list.add(null);
+        list.stream().forEach(System.out::println);
+        list.stream().forEach(item -> {
+            System.out.println(item);
+        });
+
+    }
+
+
 }
